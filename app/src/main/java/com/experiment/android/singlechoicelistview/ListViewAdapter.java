@@ -13,13 +13,13 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ListViewAdapter extends ArrayAdapter<LanguageModel> {
+public class ListViewAdapter extends ArrayAdapter<ItemsModel> {
 
-    private List<LanguageModel> itemList;
+    private List<ItemsModel> itemList;
     private Context context;
     private int selectedPosition = 0;
 
-    public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<LanguageModel> itemList) {
+    public ListViewAdapter(@NonNull Context context, int resource, @NonNull List<ItemsModel> itemList) {
         super(context, resource, itemList);
 
         this.context = context;
@@ -34,7 +34,7 @@ public class ListViewAdapter extends ArrayAdapter<LanguageModel> {
         return selectedPosition;
     }
 
-    public LanguageModel getSelectedItem() {
+    public ItemsModel getSelectedItem() {
         return itemList.get(selectedPosition);
     }
 
@@ -55,7 +55,7 @@ public class ListViewAdapter extends ArrayAdapter<LanguageModel> {
         }
 
         viewHolder.rbSelection.setTag(position);
-        viewHolder.tvLanguageLabel.setText(getItem(position).getLanguageName());
+        viewHolder.tvLanguageLabel.setText(getItem(position).getItemName());
         viewHolder.rbSelection.setChecked(position == selectedPosition);
         viewHolder.rbSelection.setOnClickListener(onStateChangeListener(viewHolder.rbSelection, position));
 

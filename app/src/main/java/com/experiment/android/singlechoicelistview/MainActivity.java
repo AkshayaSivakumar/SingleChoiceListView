@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView lvItems;
     private Button btnConfirm;
-    private ArrayList<LanguageModel> langList;
+    private ArrayList<ItemsModel> itemsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         createDataSet();
 
-        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.layout_lv_item, langList);
+        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.layout_lv_item, itemsList);
         adapter.setSelectedPosition(1);
         lvItems.setAdapter(adapter);
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("Item position " + adapter.getSelectedPosition());
-                System.out.println("Item " + ((LanguageModel) adapter.getSelectedItem()).getLanguageName());
+                System.out.println("Item " + ((ItemsModel) adapter.getSelectedItem()).getItemName());
             }
         });
     }
@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 System.out.println("Item position " + position);
-                System.out.println("Item " + ((LanguageModel) parent.getItemAtPosition(position)).getLanguageName());
+                System.out.println("Item " + ((ItemsModel) parent.getItemAtPosition(position)).getItemName());
             }
         };
     }
 
     private void createDataSet() {
-        langList = new ArrayList<>();
-        langList.add(new LanguageModel("English", "ENG"));
-        langList.add(new LanguageModel("Tamil", "TAM"));
-        langList.add(new LanguageModel("Hindi", "HIN"));
+        itemsList = new ArrayList<>();
+        itemsList.add(new ItemsModel("Tamil Nadu", "TN"));
+        itemsList.add(new ItemsModel("Telangana", "TS"));
+        itemsList.add(new ItemsModel("Andhra Pradesh", "AP"));
     }
 }
