@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvItems;
     private Button btnConfirm;
     private ArrayList<ItemsModel> itemsList;
+    private ListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
         createDataSet();
 
-        ListViewAdapter adapter = new ListViewAdapter(this, R.layout.layout_lv_item, itemsList);
+        adapter = new ListViewAdapter(this, R.layout.layout_lv_item, itemsList);
         adapter.setSelectedPosition(1);
         lvItems.setAdapter(adapter);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 System.out.println("Item position " + adapter.getSelectedPosition());
                 System.out.println("Item " + ((ItemsModel) adapter.getSelectedItem()).getItemName());
             }
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setSelectedPosition(position);
+                adapter.notifyDataSetChanged();
+
                 System.out.println("Item position " + position);
                 System.out.println("Item " + ((ItemsModel) parent.getItemAtPosition(position)).getItemName());
             }
